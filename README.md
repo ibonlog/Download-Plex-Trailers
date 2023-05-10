@@ -1,4 +1,4 @@
-# YouTube Trailer Downloader
+# Download Plex Trailers
 
 Este programa descarga trailers de YouTube para películas y series que se almacenan en una carpeta especificada. El programa utiliza la API de YouTube para buscar videos y la biblioteca yt_dlp para descargar videos. También utiliza el paquete dotenv para cargar una variable de entorno que contiene la clave de API de YouTube. Las películas y series deben estar en directorios con los nombres de las peliculas de forma legible y el fichero de la pelicula igualmente legible. Las series estarán gerarquicamente orgranizadas por SerieName/Season X/ donde se creará un directorio SerieName/Trailers.
 
