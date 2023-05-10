@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  ofelia:
+    container_name: trailers-cron
+    image: mcuadros/ofelia:latest
+    depends_on:
+      - trailers-films
+      - trailers-shows
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      DOCKER: COMPOSE
+
+
+  trailers-films:
+    container_name: trailers-films
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+    volumes:
+      - ${SEARCH_PATH_FILMS}:/videos-to-search
+    tty: true
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.trailers-films.schedule: "${SCHEDULE}"
+      ofelia.job-exec.trailers-films.command: "/usr/local/bin/python3 /app/complete-plex-trailers.py /videos-to-search 5"
+    
+
+  trailers-shows:
+    container_name: trailers-shows
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      - YOUTUBE_API_KEY=${YOUTUBE_API_KEY}
+    volumes:
+      - ${SEARCH_PATH_SHOWS}:/videos-to-search
+    tty: true
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.trailers-shows.schedule: "${SCHEDULE}"
+      ofelia.job-exec.trailers-shows.command: "/usr/local/bin/python3 /app/complete-plex-trailers.py /videos-to-search 5"
+    
