@@ -114,14 +114,14 @@ def get_dir_and_files(path_search):
         for file in files:
             file_extension = os.path.splitext(file)[1].lower()
 
-            if "season" in root.lower() or "temporada" in root.lower() or "trailers" in root.lower():
+            if "season" in root.lower() or "temporada" in root.lower():
 
-                if file_extension in video_extensions and "trailers" not in root.lower():
+                if file_extension in video_extensions and "trailers" not in file.lower():
 
                     path_filmorshow = get_left_string(root,os.sep)
                     
-                    target_possible = os.path.join(get_left_string(root,os.sep), "Trailers/Trailer 1.mp4")
-                    if not os.path.exists(target_possible) and path_filmorshow not in paths:
+                    target_possible = os.path.join(get_left_string(root,os.sep), get_right_string(get_left_string(root,os.sep),os.sep) + "-trailer.mp4")
+                    if "trailer" not in file.lower() and not os.path.exists(target_possible) and path_filmorshow not in paths:
                         paths.append(path_filmorshow)
                         dir_and_files.append({"type": "show", "search": get_right_string(get_left_string(root,os.sep),os.sep), "path": path_filmorshow, "target": target_possible})
 
@@ -130,7 +130,7 @@ def get_dir_and_files(path_search):
                 path_filmorshow = root
 
                 target_possible = os.path.join(root, get_left_string(file, ".") + "-trailer.mp4")
-                if not "trailer" in file.lower() and not os.path.exists(target_possible) and path_filmorshow not in paths:
+                if "trailer" not in file.lower() and not os.path.exists(target_possible) and path_filmorshow not in paths:
                     paths.append(path_filmorshow)
                     dir_and_files.append({"type": "film", "search": get_right_string(root,os.sep), "path": path_filmorshow, "target": target_possible})
           
