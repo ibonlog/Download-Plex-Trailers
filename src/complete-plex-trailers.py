@@ -33,8 +33,8 @@ def search_video(query):
     youtube = build('youtube','v3',developerKey = YOUTUBE_API_KEY)
     results = youtube.search().list(q = query, type ='video', part = "id, snippet", maxResults = 10, regionCode = "ES").execute().get("items", [])
 
-    notin_channel_words = ["netflix", "spanish", "latino", "doblaje"]
-    notin_title_words = ["latino","subtitulado","subtitulos","subtítulos", "resumen", "explica", "doblado"]
+    notin_channel_words = ["spanish", "latino", "doblaje"]
+    notin_title_words = ["latino", "resumen", "explica", "doblado"]
     first_result = ""
     for result in results:
         if first_result == "":
@@ -174,9 +174,9 @@ for trailer in trailers_to_download:
 
     if count_downloads < downloads_limit:
         if trailer["type"] == "show":
-            search_string = trailer["search"] + " trailer serie en castellano"
+            search_string = trailer["search"].lower() + " trailer serie en castellano -latino"
         else:
-            search_string = trailer["search"] + " trailer en castellano"
+            search_string = trailer["search"].lower() + " trailer en castellano -latino"
 
         video_id = search_video(search_string)
         if video_id:
