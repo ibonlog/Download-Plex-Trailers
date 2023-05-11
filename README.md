@@ -45,7 +45,7 @@ Organizacion de carpetas y archivos, para que el funcionamiento automatizado y q
 El programa acepta dos argumentos de línea de comando: la ruta de la carpeta de búsqueda y el número máximo de descargas a realizar en la misma llamada. Ejecutar el programa con el siguiente comando:
 
 `
-python youtube_trailer_downloader.py <search_path> <downloads_limit>
+python complete-plex-trailers.py <search_path> <downloads_limit>
 `
 
 Se necesita un fichero .env con las variables de entorno que usarán tanto el script python como el docker-compose:
@@ -61,7 +61,7 @@ SCHEDULE=@every 5m
 
 ## Instalación
 
-Para instalar las dependencias, ejecute el siguiente comando en la terminal:
+Para instalar las dependencias, si se quiere ejecutar manualmente sin docker, ejecute el siguiente comando en la terminal:
 
 `
 pip install -r requirements.txt
